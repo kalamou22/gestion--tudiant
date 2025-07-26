@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un étudiant</title>
+  <style>
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      max-width: 640px;
+      padding: 48px 40px;
+      animation: slideIn 0.6s ease-out;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      color: #1e293b;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      color: #1f2937;
+      background: #fff;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 24px;
+      text-align: center;
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Modifier un étudiant</h1>
+    <form action="/etudiants/<%= etudiant.id %>?_method=PUT" method="POST">
+      <div class="form-group">
+        <label for="matricule">Matricule</label>
+        <input type="text" id="matricule" name="matricule" required value="<%= etudiant.matricule %>">
+      </div>
+
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required value="<%= etudiant.nom %>">
+      </div>
+
+      <div class="form-group">
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" required value="<%= etudiant.prenom %>">
+      </div>
+
+      <div class="form-group">
+        <label for="date_naissance">Date de naissance</label>
+        <input type="date" id="date_naissance" name="date_naissance" required value="<%= etudiant.date_naissance.toISOString().slice(0,10) %>">
+      </div>
+
+      <div class="form-group">
+        <label for="adresse">Adresse</label>
+        <input type="text" id="adresse" name="adresse" required value="<%= etudiant.adresse %>">
+      </div>
+
+      <div class="form-group">
+        <label for="sexe">Sexe</label>
+        <select id="sexe" name="sexe" required>
+          <option value="">-- Sélectionnez --</option>
+          <option value="Masculin" <%= etudiant.sexe === 'Masculin' ? 'selected' : '' %>>Masculin</option>
+          <option value="Féminin" <%= etudiant.sexe === 'Féminin' ? 'selected' : '' %>>Féminin</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="nationalite">Nationalité</label>
+        <input type="text" id="nationalite" name="nationalite" required value="<%= etudiant.nationalite %>">
+      </div>
+
+      <div class="form-group">
+        <label for="universite">Université</label>
+        <input type="text" id="universite" name="universite" required value="<%= etudiant.universite %>">
+      </div>
+
+      <div class="form-group">
+        <label for="classe">Classe</label>
+        <input type="text" id="classe" name="classe" required value="<%= etudiant.classe %>">
+      </div>
+
+      <div class="form-group">
+        <label for="filiere">Filière</label>
+        <input type="text" id="filiere" name="filiere" required value="<%= etudiant.filiere %>">
+      </div>
+
+      <button type="submit" class="btn">Mettre à jour</button>
+    </form>
+
+    <a href="/etudiants" class="back-link">← Retour à la liste</a>
+  </div>
+</body>
+</html>
